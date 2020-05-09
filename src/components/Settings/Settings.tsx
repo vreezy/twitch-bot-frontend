@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+import { GameService } from '../../services/GameService'
+
 import styles from './Settings.module.scss';
 
 import { IUser } from '../../interfaces/IUser';
@@ -36,7 +38,10 @@ export function Settings(props: ISettingsProps) {
          const countBots: number = props.minPlayer - users.length;
          if(countBots > 0) {
             for(let i = 0; i < countBots; i++) {
-               new Player(user["user-id"], user["display-name"]
+               const displayName = `bot${GameService.rollDice(100,999)}`;
+               const bot = new Player("000", displayName);
+               bot.setIsBot();
+               players.add(bot);
             }
          }
 
@@ -47,7 +52,7 @@ export function Settings(props: ISettingsProps) {
       if(loading) {
          loadContent();
       }
-   }, [loading, props]);
+   }, [loading]);
 
 
    // Loading Render
@@ -64,13 +69,18 @@ export function Settings(props: ISettingsProps) {
       <div>
          <section className="section">
             <div className="container">
-               <div className="field">
-                  <label className="label">
-                     Mindest Player
-                  </label>
+               <label className="label">
+                  minimum Player
+               </label>
+               <div className="field is-grouped">
+                  
                   <div className="control">
-                     <input onChange={props.onChangeMinPlayer} className="input" type="number" min="2" step="1" placeholder="10" value={props.minPlayer}/>
+                     <input onChange={props.onChangeMinPlayer} className="input" type="number" min="2" max="200" step="1" placeholder="10" value={props.minPlayer}/>
                   </div>
+                  <div className="control">
+                     <button className="button is-link" type="button" onClick={() => setLoading(true)}>Update</button>
+                  </div>
+ 
                </div>
 
                <label className="label">
@@ -79,19 +89,15 @@ export function Settings(props: ISettingsProps) {
                <div className="control">
                   <button className="button is-link" type="button" onClick={() => props.onChangeMenu(1)}>Rock Paper Scissors</button>
                </div>
- 
-    
-           
-            
-            get player: button / or auto update?<br />
-
             </div>
          </section>
 
          <section className="section"> 
-            <p>Alle Spieler({props.players.length()}):</p>
-            <div className={styles.playersContainer}>
-               {props.players.render()}
+            <div className="container">
+               <p>Alle Spieler({props.players.length()}):</p>
+               <div className={styles.playersContainer}>
+                  {props.players.render()}
+               </div>
             </div>
          </section>
       </div>
