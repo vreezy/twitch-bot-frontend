@@ -17,18 +17,31 @@ import { Players } from '../../models/Players';
 
 function App() {
    const [players, setPlayers] = useState(new Players());
+   const [minPlayer, setMinPlayer] = useState(10);
    const [menu, setMenu] = useState(0);
 
   // const [loading, setLoading] = useState(true);
 
-
-
+   const onChangeMinPlayer = (event: React.FormEvent<HTMLInputElement>): void => {
+      // @ts-ignore
+      setMinPlayer(event.target.value);
+   }
+   
    switch(menu) {
       default:
       case 0:
-         return <Settings players={players} onChangeMenu={(menu) => setMenu(menu)} onChangePlayers={(players) => setPlayers(players)}/>
+         return   <Settings
+                     players={players}
+                     minPlayer={minPlayer}
+                     onChangeMinPlayer={onChangeMinPlayer}
+                     onChangeMenu={(menu) => setMenu(menu)}
+                     onChangePlayers={(players) => setPlayers(players)}
+                  />
       case 1:
-         return <BattleZone players={players} onChange={(players) => setPlayers(players)}/>
+         return   <BattleZone
+                     players={players}
+                     onChange={(players) => setPlayers(players)}
+                  />
    }
 }
 
