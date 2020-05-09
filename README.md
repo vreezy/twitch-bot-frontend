@@ -9,8 +9,12 @@ and let remove xml-declaration, metadata and comments
 https://create-react-app.dev/docs/adding-typescript/
 npx create-react-app my-app --template typescript
 npm install node-sass --save
-npm install react-svg --save
+npm install bulma --save
 npm install uuid --save
+npm install @types/uuid
+npm install react-svg --save
+
+
 
 
 

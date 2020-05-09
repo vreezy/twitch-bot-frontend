@@ -54,16 +54,16 @@ function App() {
     <div>
  
       <section className="section"> 
-        <div className="container">
+        
             <h1 className="title">
               Rock Paper Scissors
             </h1>
 
-            <div className="tile">
+            <div className={styles.playersContainer}>
               {players.render()}
             </div>
 
-        </div>
+        
       </section>
 
               
