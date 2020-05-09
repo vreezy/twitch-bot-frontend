@@ -30,33 +30,6 @@ export function PlayerView(props: IPlayerView) {
 
     const pid = "playerimage" + uuidv4();
 
-    // useEffect(() => {
-    //   if(playerSVG && playerSVG.current !== null) {
-    //     // const playerimage = document.getElementById(pid);
-    //     playerSVG.current.querySelector("tspan.tspan2157");
-    //     // console.log(playerimage)
-    //     // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
-    //     // @ts-ignore
-    //     // playerSVG.current.focus()
-    //     // const playerimage = playerSVG.current
-    //     // @ts-ignore
-
-        
-    //     // playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
-    //     // ReactDOM.findDOMNode(Player)
-    //     // const playerimage = document.getElementById(playerSVG.current);
-    //     // if(playerimage !== null) {
-    //     //   // @ts-ignore
-    //     //   playerimage.getElementById("tspan2157").textContent = "Hallo Welt";
-    //     //   // playerlevel
-    //     //   // @ts-ignore
-    //     //   playerimage.getElementById("tspan2157-9").textContent = "1";
-    //     //   // playerwins
-    //     //   // @ts-ignore
-    //     //   playerimage.getElementById("tspan2157-9-9").textContent = "0";
-    //     // }
-    //   }
-    // }, [playerSVG]) 
 
     return (
       <div className={styles.container}>
@@ -76,6 +49,8 @@ export function PlayerView(props: IPlayerView) {
             all[0].textContent = props.displayName;
             all[1].textContent = "1";
             all[2].textContent = props.wins.toString();
+
+            
           }
           console.log(svg)
         }}
@@ -88,17 +63,12 @@ export function PlayerView(props: IPlayerView) {
         loading={() => <span>Loading</span>}
         renumerateIRIElements={false}
         wrapper="span"
-        className="wrapper-class-name"
+        className={styles.player}
         onClick={() => {
           console.log('wrapper onClick')
         }}
       />
         
-        {/* 
-        @ts-ignore */}
-        {/* <Player ref={playerSVG} id={pid} className={styles.player}/> */}
-        {/* <img src={player} className="player" id={pid} ref={playerSVG} alt="Player box"/> */}
-      
      
    <div className={styles.char}>
        &nbsp;

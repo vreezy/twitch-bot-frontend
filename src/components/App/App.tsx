@@ -55,24 +55,14 @@ function App() {
  
       <section className="section"> 
         
-            <h1 className="title">
-              Rock Paper Scissors
-            </h1>
-
+            <p>Alle Spieler({players.length()}):</p>
             <div className={styles.playersContainer}>
               {players.render()}
             </div>
-
-        
       </section>
-
-              
-
-
 
       <BattleZone players={players} onChange={(players) => setPlayers(players)}/>
      
-
     </div>
 
   );
