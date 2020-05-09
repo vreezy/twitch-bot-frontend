@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 
 import { GameService } from '../../services/GameService'
+import { RandomService } from '../../services/RandomService'
 
 import styles from './Settings.module.scss';
 
@@ -36,10 +37,10 @@ export function Settings(props: ISettingsProps) {
       
          // add Bots
          const countBots: number = props.minPlayer - users.length;
+         const names: string[] = await RandomService.getRandomNames(countBots);
          if(countBots > 0) {
             for(let i = 0; i < countBots; i++) {
-               const displayName = `bot${GameService.rollDice(100,999)}`;
-               const bot = new Player("000", displayName);
+               const bot = new Player("00Bot", names[i]);
                bot.setIsBot();
                players.add(bot);
             }
