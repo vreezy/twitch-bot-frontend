@@ -35,17 +35,13 @@ export function PlayerView(props: IPlayerView) {
                   all[2].textContent = props.wins.toString();
 
 
-                  var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'image');
-                  newElement.setAttribute("x","15"); //Set path's data
-                  newElement.setAttribute("y","15");
-                  newElement.setAttribute("width","60%");
-                  newElement.setAttribute("height","60%");
-                  newElement.setAttribute("href",char);
-                  newElement.setAttribute("transform","translate(200,0) scale(-1, 1) translate(-100, -100) scale(2, 2) scale(1, 1) rotate(45, 100, 100)");
-
-
-                  // transform="scale(-2,2)"
-                  svg.appendChild(newElement);
+                  // var newElement = document.createElementNS("http://www.w3.org/2000/svg", 'image');
+                  // newElement.setAttribute("x","15"); //Set path's data
+                  // newElement.setAttribute("y","10");
+                  // newElement.setAttribute("width","60%");
+                  // newElement.setAttribute("height","60%");
+                  // newElement.setAttribute("href",char);
+                  // svg.appendChild(newElement);
 
                   svg.style.width = "100%";
                   svg.style.height = "100%";
@@ -62,13 +58,13 @@ export function PlayerView(props: IPlayerView) {
             loading={() => <span>Loading</span>}
             renumerateIRIElements={false}
             wrapper="span"
-            className={styles.player}
+            className={[styles.item, styles.player].join(" ")}
             onClick={() => {
                console.log('wrapper onClick')
             }}
          />
-         <div className={styles.char}>
-         {/* <ReactSVG
+
+         <ReactSVG
             src={char}
             afterInjection={(error, svg) => {
                if (error) {
@@ -76,19 +72,10 @@ export function PlayerView(props: IPlayerView) {
                   return
                }
          
-               // if(svg !== undefined && svg !== null) {
-               //    // @ts-ignore
-               //    svg.querySelector("tspan").textContent = props.displayName;
-
-               //    const all = svg.querySelectorAll("tspan");
-               //    all[0].textContent = props.displayName;
-               //    // TODO: Calc Level based on xp
-               //    all[1].textContent = "1"; 
-               //    all[2].textContent = props.wins.toString();
-
-               //    svg.style.width = "100%";
-               //    svg.style.height = "100%";
-               // }
+               if(svg !== undefined && svg !== null) {
+                  svg.style.width = "100%";
+                  svg.style.height = "100%";
+               } 
                // console.log(svg)
             }}
             // beforeInjection={svg => {
@@ -100,12 +87,14 @@ export function PlayerView(props: IPlayerView) {
             loading={() => <span>Loading</span>}
             renumerateIRIElements={false}
             wrapper="span"
-            className={styles.player}
+            className={[styles.item, styles.char].join(" ")}
             onClick={() => {
                console.log('wrapper onClick')
             }}
-         /> */}
-         </div>
+         />
+
+         {/* TODO: weapon */}
+
       </div>
    )
 }
