@@ -53,12 +53,21 @@ function App() {
 
     <div>
  
+
+
+      <section className="section">
+         <p>Options:</p>   
+         min player: textfield<br />
+         fill with bots: boolean <br />
+         get player: button / or auto update?<br />
+         select game: buttons <br />
+      </section>
+
       <section className="section"> 
-        
-            <p>Alle Spieler({players.length()}):</p>
-            <div className={styles.playersContainer}>
-              {players.render()}
-            </div>
+         <p>Alle Spieler({players.length()}):</p>
+         <div className={styles.playersContainer}>
+            {players.render()}
+         </div>
       </section>
 
       {/* <BattleZone players={players} onChange={(players) => setPlayers(players)}/> */}
