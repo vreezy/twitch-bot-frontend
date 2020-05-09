@@ -1,81 +1,35 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+
 import styles from './App.module.scss';
 import './app.scss';
-// import { PlayerList } from '../PlayerList/PlayerList';
+
 
 import { BattleZone } from '../BattleZone/BattleZone';
+import { Settings } from '../Settings/Settings';
 
-import { IUser } from '../../interfaces/IUser';
+// import { IUser } from '../../interfaces/IUser';
 
-import { Player } from '../../models/Player'     // Component
-import { Players } from '../../models/Players'   // Composite
+// import { Player } from '../../models/Player';
+import { Players } from '../../models/Players';
 
 // https://reactjs.org/docs/hooks-faq.html#how-can-i-do-data-fetching-with-hooks
 
 function App() {
-  
-  const [players, setPlayers] = useState(new Players());
+   const [players, setPlayers] = useState(new Players());
+   const [menu, setMenu] = useState(0);
 
-  const [loading, setLoading] = useState(true);
-
-
-  
-  useEffect(() => {
-    async function loadContent() {
-      const response = await fetch('http://localhost:8080');
-      const users: IUser[] = await response.json();
-
-      const players = new Players();
-
-      users.forEach((user: IUser) => {
-        players.add(new Player(user["user-id"], user["display-name"]))
-      })
-      
-      setPlayers(players);
-      setLoading(false);
-    }
-    if(loading) {
-      loadContent();
-    }
-  }, [loading]);
-
-  if(loading) {
-    return (
-      <div>
-        LOADING...
-      </div>
-    )
-  }
+  // const [loading, setLoading] = useState(true);
 
 
-  return (
 
-    <div>
- 
-
-
-      <section className="section">
-         <p>Options:</p>   
-         min player: textfield<br />
-         fill with bots: boolean <br />
-         get player: button / or auto update?<br />
-         select game: buttons <br />
-      </section>
-
-      <section className="section"> 
-         <p>Alle Spieler({players.length()}):</p>
-         <div className={styles.playersContainer}>
-            {players.render()}
-         </div>
-      </section>
-
-      {/* <BattleZone players={players} onChange={(players) => setPlayers(players)}/> */}
-     
-    </div>
-
-  );
+   switch(menu) {
+      default:
+      case 0:
+         return <Settings players={players} onChangeMenu={(menu) => setMenu(menu)} onChangePlayers={(players) => setPlayers(players)}/>
+      case 1:
+         return <BattleZone players={players} onChange={(players) => setPlayers(players)}/>
+   }
 }
 
 export default App;
-
