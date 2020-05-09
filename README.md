@@ -2,7 +2,7 @@
 ## SVG (Inkscape)
 ### Save as Optimized SVG
 and let remove xml-declaration, metadata and comments
-![optimized]](./docuu/svg-optmized.jpg)
+![optimized]](./docu/svg-optmized.jpg)
 
 # BUILD
 ## Packets installed
