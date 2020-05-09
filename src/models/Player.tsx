@@ -36,7 +36,12 @@ export class Player extends Component {
 
     public render(): React.ReactNode {
         return (
-            <PlayerView key={uuid()} displayName={this.displayName} wins={this.wins}/>
+            <PlayerView
+                key={uuid()}
+                displayName={this.displayName}
+                wins={this.wins}
+                xp={0}
+            />
         );
     }
 }

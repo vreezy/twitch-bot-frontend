@@ -61,7 +61,7 @@ function App() {
             </div>
       </section>
 
-      <BattleZone players={players} onChange={(players) => setPlayers(players)}/>
+      {/* <BattleZone players={players} onChange={(players) => setPlayers(players)}/> */}
      
     </div>
 
