@@ -32,6 +32,9 @@ export class Players extends Composite {
         return this.children.length;
     }
 
+    public activePlayerLength(): number {
+      return this.getActivePlayers().length;
+    }
     private getActivePlayers(): Player[] {
         // console.log("children", this.children)
         return this.children.filter((child: Component) => {

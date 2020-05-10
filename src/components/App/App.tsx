@@ -40,7 +40,6 @@ function App() {
       case 1:
          return   <BattleZone
                      players={players}
-                     onChange={(players) => setPlayers(players)}
                   />
    }
 }

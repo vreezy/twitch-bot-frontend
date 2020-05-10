@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import styles from './BattleZone.module.scss'; 
+// import styles from './BattleZone.module.scss'; 
 import './BattleZone.scss';
 
 import { Player } from '../../models/Player';
-import { Players } from '../../models/Players';
+// import { Players } from '../../models/Players';
 
 import { GameService } from '../../services/GameService';
 
@@ -39,6 +39,11 @@ export function Phase(props: IPhaseProps) {
       setPhase(phase + 1);
    }
 
+   // reset phase in next round
+   useEffect(() => {
+      setPhase(0);
+   }, [props.round]);
+
    const middleView = () => {
       if(phase < 1) {
          return <span>VS.</span>
@@ -52,46 +57,53 @@ export function Phase(props: IPhaseProps) {
       if(phase < 4) {
          return <span>1</span>
       }
-      // if draw return draw
+      return <span>DRAW or nothing</span>
+      
    }
 
    return (
       <div>
          <section className="section"> 
                <div className="container">
-                  <p>Kampfzone</p>
+                  <p>Kampfzone (Runde: {props.round})</p>
                   
                   <div className="tile">
-                     <div className="tile is-2">
-                           {props.player1.render()}
+                     <div className="tile is-4">
+                        <div className="columns is-vcentered is-100">
+                           <div className="column is-full has-text-centered">
+                              {props.player1.render()}
+                           </div>
+                        </div>
                      </div>
                      
-                     <div className="tile is-2">
+                     {/* <div className="tile is-2">
                      
 
-                           {/* <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/> */}
-                           {/* {player1HandValue}<br/> */}
-                           {/* {resultView(player1HandValue, player2HandValue)}  */}
-                     </div>
+                           <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/>
+                           {player1HandValue}<br/>
+                           {resultView(player1HandValue, player2HandValue)} 
+                     </div>  */}
                      <div className="tile is-4 has-text-centered">
                            <div className="columns is-vcentered is-100">
                               <div className="column is-full has-text-centered">
-                                 {middleView()}<br/>
-                                 Round {props.round}<br />
-                                
+                                 {middleView()}
                               </div>
                            </div>
    
                      </div>
-                     <div className="tile is-2">
+                     {/* <div className="tile is-2">
 
-                           {/* <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/> */}
-                           {/* {player2HandValue}<br/> */}
-                           {/* {resultView(player2HandValue, player1HandValue)}  */}
-                     </div>
+                           <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/>
+                           {player2HandValue}<br/>
+                           {resultView(player2HandValue, player1HandValue)} 
+                     </div> */}
                            
-                     <div className="tile is-2">
-                           {props.player2.render()}    
+                     <div className="tile is-4">
+                        <div className="columns is-vcentered is-100">
+                           <div className="column is-full has-text-centered">
+                              {props.player2.render()}
+                           </div>
+                        </div>   
                      </div>
                
                   </div>

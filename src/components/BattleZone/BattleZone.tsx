@@ -128,65 +128,30 @@ export function BattleZone(props: IBattleZoneProps) {
 
 
 
-    if(player1 !== null && player2 !== null ) {
-        return (
-            <div>
+   if(player1 !== null && player2 !== null ) {
+      return (
+         <div>
             <section className="section"> 
-                <div className="container">
-                    
-                     <p> Aktive Spieler</p>
-                    
+               <div className="container">
+                  
+                     <p>Aktive Spieler ({props.players.activePlayerLength()})</p>
+                  
                
-                    <div className={styles.playersContainer}>
+                  <div className={styles.playersContainer}>
                         {props.players.renderOnlyActive()}
-                    </div>
+                  </div>
 
-                </div>
+               </div>
             </section>
 
-            <section className="section"> 
-                <div className="container">
-                    <p>Kampfzone</p>
-                    
-                    <div className="tile">
-                        <div className="tile is-2">
-                            {player1.render()}
-                        </div>
-                        
-                        <div className="tile is-2">
-                        
-
-                            <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/>
-                            {/* {player1HandValue}<br/> */}
-                            {/* {resultView(player1HandValue, player2HandValue)}  */}
-                        </div>
-                        <div className="tile is-4 has-text-centered">
-                            <div className="columns is-vcentered is-100">
-                                <div className="column is-full has-text-centered">
-                                    {middleView()}<br/>
-                                    Round {round}<br />
-                                    {roundTime}
-                                </div>
-                            </div>
-    
-                        </div>
-                        <div className="tile is-2">
-
-                            <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/>
-                            {/* {player2HandValue}<br/> */}
-                            {/* {resultView(player2HandValue, player1HandValue)}  */}
-                        </div>
-                            
-                        <div className="tile is-2">
-                            {player2.render()}    
-                        </div>
-                
-                    </div>
-                </div>
-            </section>
-            </div>
-        );
-    }
+            <Phase
+               player1={player1}
+               player2={player2}
+               round={round}
+            />
+         </div>
+      );
+   }
 
     return (
         <div>
