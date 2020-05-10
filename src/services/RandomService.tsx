@@ -5,6 +5,8 @@ export class RandomService {
 
    public static async getRandomNames(count: number): Promise<string[]> {
       try {
+         GameService.durstenfeldShuffle(names);
+         
          return names;
       }
       catch(e) {

@@ -188,12 +188,16 @@ export function BattleZone(props: IBattleZoneProps) {
 
     return (
         <div>
-            Gewinner
+            <section className="section">
+               <div className="container">
+                  Gewinner
 
-            <div className={styles.playersContainer}>
+                  <div className={styles.playersContainer}>
                 
-                {players.renderWinner()}
-            </div>
+                     {players.renderWinner()}
+                  </div>
+               </div>
+            </section>
         </div>
     )
 }

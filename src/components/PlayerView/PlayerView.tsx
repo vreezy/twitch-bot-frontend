@@ -29,7 +29,7 @@ export function PlayerView(props: IPlayerView) {
                   svg.querySelector("tspan").textContent = props.displayName;
 
                   const all = svg.querySelectorAll("tspan");
-                  all[0].textContent = props.displayName;
+                  all[0].textContent = props.displayName.length > 16 ? props.displayName.slice(0,16).trim() + "..." : props.displayName ;
                   // TODO: Calc Level based on xp
                   all[1].textContent = "1"; 
                   all[2].textContent = props.wins.toString();

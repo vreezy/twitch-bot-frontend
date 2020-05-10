@@ -19,7 +19,7 @@ export interface ISettingsProps {
 }
 
 export function Settings(props: ISettingsProps) {
-   
+   const [minPlayer, setMinPlayer] = useState(10)
    const [loading, setLoading] = useState(true);
   
    // get Data

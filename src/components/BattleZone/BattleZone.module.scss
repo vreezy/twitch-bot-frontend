@@ -15,19 +15,35 @@
     justify-items: center;
 }
 
-
 .playersContainer {
-    border: 1px solid red;
-    width: 100%;
-    display: grid;
-    // grid-gap: 8px;
-
-    grid-auto-flow: column;
-    
-    grid-template-columns: 100px;
-    grid-template-rows: 100px;
-    box-sizing: border-box;
+   border: 2px solid black;
+   width: 100%;
+   // height: 100px;
+   display: grid;
+   // grid-auto-flow: column;
+   grid-template-columns: repeat(auto-fill, 20%);
+   // grid-auto-columns: minmax(200px, 200px);
+   // gap: -100px;
+   // grid-column-start: 100px;
+   grid-column-end: -1;
+   // grid-template-columns: 100px;
+   box-sizing: border-box;
+   overflow: hidden;
 }
+
+
+// .playersContainer {
+//     border: 1px solid red;
+//     width: 100%;
+//     display: grid;
+//     // grid-gap: 8px;
+
+//     grid-auto-flow: column;
+    
+//     grid-template-columns: 100px;
+//     grid-template-rows: 100px;
+//     box-sizing: border-box;
+// }
 
 .image {
     width: 100%;
