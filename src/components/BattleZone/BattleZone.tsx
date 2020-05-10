@@ -132,11 +132,11 @@ export function BattleZone(props: IBattleZoneProps) {
             <div>
             <section className="section"> 
                 <div className="container">
-                    <h1 className="title">
-                        Aktive Spieler
-                    </h1>
+                    
+                     <p> Aktive Spieler</p>
+                    
                
-                    <div className="tile">
+                    <div className={styles.playersContainer}>
                         {players.renderOnlyActive()}
                     </div>
 
@@ -145,7 +145,7 @@ export function BattleZone(props: IBattleZoneProps) {
 
             <section className="section"> 
                 <div className="container">
-                    <h1 className="title">Kampfzone</h1>
+                    <p>Kampfzone</p>
                     
                     <div className="tile">
                         <div className="tile is-2">

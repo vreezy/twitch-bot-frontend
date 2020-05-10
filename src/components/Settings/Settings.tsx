@@ -23,6 +23,7 @@ export function Settings(props: ISettingsProps) {
   
    // get Data
    useEffect(() => {
+      console.log("effect called")
       async function loadContent() {
          const response = await fetch('http://localhost:8080');
          const users: IUser[] = await response.json();
@@ -49,10 +50,12 @@ export function Settings(props: ISettingsProps) {
          setLoading(false);
       }
 
-      if(loading || props.minPlayer.toString() !== props.players.length().toString()) {
+      // if(loading || props.minPlayer.toString() !== props.players.length().toString()) {
+      if(loading) {
+         console.log("componentDIDMount")
          loadContent();
       }
-   }, [loading, props]);
+   }, [loading]);
 
    const resetUsers = async () => {
       setLoading(true);
@@ -77,17 +80,20 @@ export function Settings(props: ISettingsProps) {
          <section className="section">
             <div className="container">
 
+               <label className="label">
+                  minimum Player
+               </label>
                <div className="field is-grouped">
-                  
                   <div className="control">
-                     
-                     <label className="label">
-                        minimum Player
-                     </label>
                      <input onChange={(event: any) => props.onChangeMinPlayer(event.target.value)} className="input" type="number" min="2" max="90" step="1" placeholder="10" value={props.minPlayer}/>
-                     {props.minPlayer}
                   </div>
+               </div>
 
+
+               <label className="label">
+                  Control
+               </label>
+               <div className="field is-grouped">
                   <div className="control">
                      <button className="button is-link" type="button" onClick={() => setLoading(true)}>Get User</button>
                   </div>
@@ -101,8 +107,10 @@ export function Settings(props: ISettingsProps) {
                <label className="label">
                   Games
                </label>
-               <div className="control">
-                  <button className="button is-link" type="button" onClick={() => props.onChangeMenu(1)}>Rock Paper Scissors</button>
+               <div className="field is-grouped">
+                  <div className="control">
+                     <button className="button is-link" type="button" onClick={() => props.onChangeMenu(1)}>Rock Paper Scissors</button>
+                  </div>
                </div>
             </div>
          </section>
