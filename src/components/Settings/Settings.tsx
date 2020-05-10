@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import { GameService } from '../../services/GameService'
+// import { GameService } from '../../services/GameService'
 import { RandomService } from '../../services/RandomService'
 
 import styles from './Settings.module.scss';
@@ -13,13 +13,12 @@ import { Players } from '../../models/Players';
 export interface ISettingsProps {
    players: Players;
    minPlayer: number;
-   onChangeMinPlayer(event: React.FormEvent<HTMLInputElement>): void;
+   onChangeMinPlayer(minPlayer: number): void;
    onChangeMenu(menu: number): void;
    onChangePlayers(players: Players): void;
 }
 
 export function Settings(props: ISettingsProps) {
-   const [minPlayer, setMinPlayer] = useState(10)
    const [loading, setLoading] = useState(true);
   
    // get Data
@@ -50,10 +49,17 @@ export function Settings(props: ISettingsProps) {
          setLoading(false);
       }
 
-      if(loading) {
+      if(loading || props.minPlayer.toString() !== props.players.length().toString()) {
          loadContent();
       }
-   }, [loading]);
+   }, [loading, props]);
+
+   const resetUsers = async () => {
+      setLoading(true);
+      const response = await fetch('http://localhost:8080/reset');
+      console.log(await response.json());
+      setLoading(false);
+   }
 
 
    // Loading Render
@@ -70,16 +76,24 @@ export function Settings(props: ISettingsProps) {
       <div>
          <section className="section">
             <div className="container">
-               <label className="label">
-                  minimum Player
-               </label>
+
                <div className="field is-grouped">
                   
                   <div className="control">
-                     <input onChange={props.onChangeMinPlayer} className="input" type="number" min="2" max="200" step="1" placeholder="10" value={props.minPlayer}/>
+                     
+                     <label className="label">
+                        minimum Player
+                     </label>
+                     <input onChange={(event: any) => props.onChangeMinPlayer(event.target.value)} className="input" type="number" min="2" max="90" step="1" placeholder="10" value={props.minPlayer}/>
+                     {props.minPlayer}
                   </div>
+
                   <div className="control">
-                     <button className="button is-link" type="button" onClick={() => setLoading(true)}>Update</button>
+                     <button className="button is-link" type="button" onClick={() => setLoading(true)}>Get User</button>
+                  </div>
+
+                  <div className="control">
+                     <button className="button is-link" type="button" onClick={resetUsers}>Reset User</button>
                   </div>
  
                </div>

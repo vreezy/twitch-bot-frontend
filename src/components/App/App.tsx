@@ -22,18 +22,18 @@ function App() {
 
   // const [loading, setLoading] = useState(true);
 
-   const onChangeMinPlayer = (event: React.FormEvent<HTMLInputElement>): void => {
-      // @ts-ignore
-      setMinPlayer(event.target.value);
-   }
-   
+   // const onChangeMinPlayer = (minPlayer:number ): void => {
+   //    // @ts-ignore
+   //    setMinPlayer(minPlayer);
+   // }
+
    switch(menu) {
       default:
       case 0:
          return   <Settings
                      players={players}
                      minPlayer={minPlayer}
-                     onChangeMinPlayer={onChangeMinPlayer}
+                     onChangeMinPlayer={(minPlayer) => setMinPlayer(minPlayer)}
                      onChangeMenu={(menu) => setMenu(menu)}
                      onChangePlayers={(players) => setPlayers(players)}
                   />
