@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+import { Phase } from './Phase';
+
 import styles from './BattleZone.module.scss'; 
 import './BattleZone.scss';
 
@@ -21,20 +23,45 @@ import scissors_right from '../../assets/scissors_right.jpg'
 
 
 export interface IBattleZoneProps {
-    players: Players;
-    onChange(players: Players) : void;
+   players: Players;
 }
 
 
 export function BattleZone(props: IBattleZoneProps) {
-    // const [players, setPlayers] = useState([]);
-    const [counter, setCounter] = useState(0);
-    const [time, setTime] = useState(10000);
+    const [round, setRound] = useState(1);
+    const [roundTime, setRoundTime] = useState(10000); // 10sec view for handle fight
 
-    const players: Players = props.players.clone();
-    console.log("PLAYERS: ", players.toString())
-    const player1: Player | null = players.getRandomActivePlayer();
-    const player2: Player | null = player1 !== null ? players.getRandomActivePlayer([player1]): null;
+   useEffect(() => {
+      var roundTimerID = setInterval(() => roundTick(), roundTime );
+      return function cleanup() {
+         clearInterval(roundTimerID);
+      };
+   });
+
+   const roundTick = () => {
+      setRound(round + 1);
+      if(player1 !== null && player2 !== null) {
+         if(player1HandValue !== player2HandValue) {
+            if(result(player1HandValue, player2HandValue)) {
+               player1.win()
+               player2.deActivate();
+            }
+            else {
+               player2.win()
+               player1.deActivate();
+            }
+         }
+         // props.onChange(players);
+      }
+      else {
+         setRoundTime(100000);
+      }
+   }
+
+    // const players: Players = props.players.clone();
+    // console.log("PLAYERS: ", players.toString())
+    const player1: Player | null = props.players.getRandomActivePlayer();
+    const player2: Player | null = player1 !== null ? props.players.getRandomActivePlayer([player1]): null; 
 
     // console.log(props.players.length())
     // console.log("Player1: ", player1)
@@ -97,35 +124,9 @@ export function BattleZone(props: IBattleZoneProps) {
     }
 
 
-    useEffect(() => {
-        var timerID = setInterval( () => tick(), time );
-        return function cleanup() {
-          clearInterval(timerID);
-        };
-    });
-
-    function tick() {
-        
-        setCounter(counter + 1);
-        if(player1 !== null && player2 !== null) {
-            if(player1HandValue !== player2HandValue) {
-                if(result(player1HandValue, player2HandValue)) {
-                    player1.win()
-                    player2.deActivate();
-                }
-                else {
-                    player2.win()
-                    player1.deActivate();
-                }
-            }
 
 
-            props.onChange(players);
-        }
-        else {
-            setTime(100000);
-        }
-    }
+
 
     if(player1 !== null && player2 !== null ) {
         return (
@@ -137,7 +138,7 @@ export function BattleZone(props: IBattleZoneProps) {
                     
                
                     <div className={styles.playersContainer}>
-                        {players.renderOnlyActive()}
+                        {props.players.renderOnlyActive()}
                     </div>
 
                 </div>
@@ -162,8 +163,9 @@ export function BattleZone(props: IBattleZoneProps) {
                         <div className="tile is-4 has-text-centered">
                             <div className="columns is-vcentered is-100">
                                 <div className="column is-full has-text-centered">
-                                    VS. <br/>
-                                    Round {counter}
+                                    {middleView()}<br/>
+                                    Round {round}<br />
+                                    {roundTime}
                                 </div>
                             </div>
     
@@ -194,7 +196,7 @@ export function BattleZone(props: IBattleZoneProps) {
 
                   <div className={styles.playersContainer}>
                 
-                     {players.renderWinner()}
+                     {props.players.renderWinner()}
                   </div>
                </div>
             </section>
