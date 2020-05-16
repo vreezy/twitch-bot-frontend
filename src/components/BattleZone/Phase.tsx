@@ -22,11 +22,13 @@ export interface IPhaseProps {
    player1: Player;
    player2: Player;
    round: number;
+   player1HandValue: number;
+   player2HandValue: number;
 }
 
 export function Phase(props: IPhaseProps) {
    const [phase, setPhase] = useState(0);
-   const [phaseTime, setPhaseTime] = useState(1000); // 10sec view for handle fight
+   const [phaseTime, setPhaseTime] = useState(4100); // 10sec view for handle fight
 
    useEffect(() => {
       var phaseTimerID = setInterval(() => phaseTick(), phaseTime );
@@ -44,32 +46,20 @@ export function Phase(props: IPhaseProps) {
       setPhase(0);
    }, [props.round]);
 
-   const middleView = () => {
-      if(phase < 1) {
-         return <span>VS.</span>
-      }
-      if(phase < 2) {
-         return <span>3</span>
-      }
-      if(phase < 3) {
-         return <span>2</span>
-      }
-      if(phase < 4) {
-         return <span>1</span>
-      }
-      return <span>DRAW or nothing</span>
-      
-   }
+
 
    const player1View = () => {
-      if(phase < 5) {
+      if(phase < 1) {
          return props.player1.renderPlayer1Jerking();
       }
       return props.player1.renderPlayer1();
    }
 
    const palyer2View = () => {
-      return props.player2.renderPlayer2Jerking();
+      if(phase < 1) {
+         return props.player2.renderPlayer2Jerking();
+      }
+      return props.player2.renderPlayer2();
    }
 
    return (
@@ -97,7 +87,7 @@ export function Phase(props: IPhaseProps) {
                      <div className="tile is-4 has-text-centered">
                            <div className="columns is-vcentered is-100">
                               <div className="column is-full has-text-centered">
-                                 {middleView()}
+                                 <MiddleView {...props}/>
                               </div>
                            </div>
    
@@ -126,3 +116,39 @@ export function Phase(props: IPhaseProps) {
 }
 
 export default Phase
+
+
+function MiddleView(props: any) {
+   const [phase, setPhase] = useState(0);
+   const [phaseTime, setPhaseTime] = useState(1000); 
+
+   useEffect(() => {
+      var phaseTimerID = setInterval(() => phaseTick(), phaseTime );
+      return function cleanup() {
+         clearInterval(phaseTimerID);
+      };
+   });
+
+   // reset phase in next round
+   useEffect(() => {
+      setPhase(0);
+   }, [props.round]);
+
+   const phaseTick = () => {
+      setPhase(phase + 1);
+   }
+   if(phase < 1) {
+      return <span>VS.</span>
+   }
+   if(phase < 2) {
+      return <span>3</span>
+   }
+   if(phase < 3) {
+      return <span>2</span>
+   }
+   if(phase < 4) {
+      return <span>1</span>
+   }
+   return <span>DRAW or nothing</span>
+
+}

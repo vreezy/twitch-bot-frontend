@@ -137,6 +137,8 @@ export function BattleZone(props: IBattleZoneProps) {
                player1={player1}
                player2={player2}
                round={round}
+               player1HandValue={player1HandValue}
+               player2HandValue={player2HandValue}
             />
 
             <section className="section"> 
