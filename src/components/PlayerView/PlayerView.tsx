@@ -5,7 +5,7 @@ import { ReactSVG } from 'react-svg'
 import player from '../../assets/player3.svg'; 
 import char from '../../assets/char.svg'; 
 
-import 
+import limb from '../../assets/limb.svg';
 import styles from './PlayerView.module.scss'; 
 
 export interface IPlayerView {
@@ -13,6 +13,7 @@ export interface IPlayerView {
   wins: number;
   xp: number;
   isRight?: boolean;
+  jerking?: boolean;
 }
 
 export function PlayerView(props: IPlayerView) {
@@ -101,8 +102,8 @@ export function PlayerView(props: IPlayerView) {
 
          {/* TODO: weapon */}
 
-         <ReactSVG
-            src={char}
+         {props.jerking && <ReactSVG
+            src={limb}
             afterInjection={(error, svg) => {
                if (error) {
                   console.error(error)
@@ -126,11 +127,11 @@ export function PlayerView(props: IPlayerView) {
             loading={() => <span>Loading</span>}
             renumerateIRIElements={false}
             wrapper="span"
-            className={[styles.item, styles.char].join(" ")}
+            className={[styles.item, props.isRight ? styles.limbRight : styles.limb,].join(" ")}
             onClick={() => {
                console.log('wrapper onClick')
             }}
-         />
+         />}
 
       </div>
    )

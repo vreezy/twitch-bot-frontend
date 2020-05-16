@@ -61,6 +61,17 @@ export function Phase(props: IPhaseProps) {
       
    }
 
+   const player1View = () => {
+      if(phase < 5) {
+         return props.player1.renderPlayer1Jerking();
+      }
+      return props.player1.renderPlayer1();
+   }
+
+   const palyer2View = () => {
+      return props.player2.renderPlayer2Jerking();
+   }
+
    return (
       <div>
          <section className="section"> 
@@ -71,7 +82,7 @@ export function Phase(props: IPhaseProps) {
                      <div className="tile is-4">
                         <div className="columns is-vcentered is-100">
                            <div className="column is-full has-text-centered">
-                              {props.player1.renderPlayer1()}
+                              {player1View()}
                            </div>
                         </div>
                      </div>
@@ -101,7 +112,7 @@ export function Phase(props: IPhaseProps) {
                      <div className="tile is-4">
                         <div className="columns is-vcentered is-100">
                            <div className="column is-full has-text-centered">
-                              {props.player2.render()}
+                              {palyer2View()}
                            </div>
                         </div>   
                      </div>
