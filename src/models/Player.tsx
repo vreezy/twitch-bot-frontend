@@ -41,6 +41,7 @@ export class Player extends Component {
    }
 
    public setWeapon(weapon: Weapon) {
+      console.log(weapon);
       this.weapon = weapon;
    }
 

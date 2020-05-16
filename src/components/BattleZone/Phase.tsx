@@ -7,7 +7,8 @@ import './BattleZone.scss';
 import { Player } from '../../models/Player';
 // import { Players } from '../../models/Players';
 
-// import { GameService } from '../../services/GameService';
+import { GameService } from '../../services/GameService';
+import { Weapon } from '../PlayerView/PlayerView';
 
 
 
@@ -15,8 +16,6 @@ export interface IPhaseProps {
    player1: Player;
    player2: Player;
    round: number;
-   player1HandValue: number;
-   player2HandValue: number;
 }
 
 export function Phase(props: IPhaseProps) {
@@ -39,10 +38,50 @@ export function Phase(props: IPhaseProps) {
       setPhase(0);
    }, [props.round]);
 
+   const result = (myValue: number, enemyValue: number): boolean => {
+      if((myValue - enemyValue) === 1 || (myValue - enemyValue) === -1) {
+          if(myValue > enemyValue) {
+              return true
+          }
+          return false
+      }
+
+      if(myValue === 0) {
+          return true
+      }
+      return false
+   }
+
+   const player1HandValue: number = GameService.rollDice(0, 2);
+   const player2HandValue: number = GameService.rollDice(0, 2);
+
    const player1View = () => {
       if(phase < 1) {
          return props.player1.renderPlayer1Jerking();
       }
+      
+      switch(player1HandValue) {
+         case 0:
+            props.player1.setWeapon(Weapon.rock);
+            break;
+         case 1:
+            props.player1.setWeapon(Weapon.paper);
+            break;
+         default:
+         case 2:
+            props.player1.setWeapon(Weapon.scissors);
+            break;
+      }
+
+      if(player1HandValue !== player2HandValue) {
+         if(result(player1HandValue, player2HandValue)) {
+            props.player1.win()
+         }
+         else {
+            props.player1.deActivate();
+         }
+      }
+
       return props.player1.renderPlayer1Weapon();
    }
 
@@ -50,6 +89,29 @@ export function Phase(props: IPhaseProps) {
       if(phase < 1) {
          return props.player2.renderPlayer2Jerking();
       }
+
+      switch(player2HandValue) {
+         case 0:
+            props.player2.setWeapon(Weapon.rock);
+            break;
+         case 1:
+            props.player2.setWeapon(Weapon.paper);
+            break;
+         default:
+         case 2:
+            props.player2.setWeapon(Weapon.scissors);
+            break;
+      }
+
+      if(player2HandValue !== player1HandValue) {
+         if(result(player2HandValue, player1HandValue)) {
+            props.player2.win()
+         }
+         else {
+            props.player2.deActivate();
+         }
+      }
+
       return props.player2.renderPlayer2Weapon();
    }
 

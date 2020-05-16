@@ -35,15 +35,49 @@
       // margin-top: -20px;
    }
 
-   .weapon {
-      // border: 5px solid blue;
-      position: relative;
-      width: 60%;
-      height: 60%;
-      right: 0px;
-      bottom: 0px;
-      // margin-top: -20px;
+   .weaponContainer {
+      z-index: 3000;
+      border: 5px solid red;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      grid-area: 1 / 1;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
+
+
+      .weapon {
+         grid-area: 2 / 1;
+         border: 5px solid blue;
+         width: 100%;
+         height: 100%
+      }
+
    }
+
+   .weaponContainerRight {
+      z-index: 3000;
+      border: 5px solid red;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      grid-area: 1 / 1;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-template-rows: 50% 50%;
+
+
+      .weapon {
+         grid-area: 2 / 2;
+         border: 5px solid blue;
+         width: 100%;
+         height: 100%
+      }
+
+  }
+
+
    
    .limb {
       // border: 5px solid blue; 

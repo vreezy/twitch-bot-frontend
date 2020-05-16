@@ -14,10 +14,10 @@ import paper from '../../assets/paper.svg';
 import scissors from '../../assets/scissors.svg';
 
 export enum Weapon {
-   blank = 0,
-   rock = 1,
-   scissors = 2,
-   paper = 3
+   blank = "blank",
+   rock = "rock",
+   scissors = "scissors",
+   paper = "paper"
 }
 
 export interface IPlayerView {
@@ -129,36 +129,38 @@ export function PlayerView(props: IPlayerView) {
 
          {/* TODO: weapon */}
 
-         {props.weapon && <ReactSVG
-            src={getWeapon()}
-            afterInjection={(error, svg) => {
-               if (error) {
-                  console.error(error)
-                  return
-               }
-         
-               if(svg !== undefined && svg !== null) {
-                  svg.style.width = "100%";
-                  svg.style.height = "100%";
-                  svg.style.transform = props.isRight ? "rotateY(180deg)" : "";
-                  
-               } 
-               // console.log(svg)
-            }}
-            // beforeInjection={svg => {
-            //   svg.classList.add('svg-class-name')
-            //   svg.setAttribute('style', 'width: 200px')
-            // }}
-            evalScripts="always"
-            fallback={() => <span>Error!</span>}
-            loading={() => <span>Loading</span>}
-            renumerateIRIElements={false}
-            wrapper="span"
-            className={[styles.item, styles.weapon].join(" ")}
-            onClick={() => {
-               console.log('wrapper onClick')
-            }}
-         />}
+         <div className={props.isRight ? styles.weaponContainerRight : styles.weaponContainer}>
+            <ReactSVG
+               src={getWeapon()}
+               afterInjection={(error, svg) => {
+                  if (error) {
+                     console.error(error)
+                     return
+                  }
+            
+                  if(svg !== undefined && svg !== null) {
+                     svg.style.width = "100%";
+                     svg.style.height = "100%";
+                     svg.style.transform = props.isRight ? "rotateY(180deg)" : "";
+                     
+                  } 
+                  // console.log(svg)
+               }}
+               // beforeInjection={svg => {
+               //   svg.classList.add('svg-class-name')
+               //   svg.setAttribute('style', 'width: 200px')
+               // }}
+               evalScripts="always"
+               fallback={() => <span>Error!</span>}
+               loading={() => <span>Loading</span>}
+               renumerateIRIElements={false}
+               wrapper="span"
+               className={[styles.item, styles.weapon].join(" ")}
+               onClick={() => {
+                  console.log('wrapper onClick')
+               }}
+            />
+         </div>
 
 
 

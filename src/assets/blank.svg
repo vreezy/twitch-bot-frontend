@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="null.svg">
+   sodipodi:docname="blank.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-482.85714"
-     inkscape:cy="560"
+     inkscape:zoom="2.8"
+     inkscape:cx="284.7727"
+     inkscape:cy="201.51281"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -51,5 +51,28 @@
   <g
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
-     id="layer1" />
+     id="layer1"
+     transform="translate(0,-197)">
+    <rect
+       style="opacity:1;fill:#af78ff;fill-opacity:1;stroke:#080808;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect812"
+       width="23.623512"
+       height="25.985863"
+       x="14.835566"
+       y="217.34152" />
+    <rect
+       style="opacity:1;fill:#af78ff;fill-opacity:1;stroke:#080808;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect814"
+       width="27.214285"
+       height="31.75"
+       x="44.223213"
+       y="232.83855" />
+    <rect
+       style="opacity:1;fill:#af78ff;fill-opacity:1;stroke:#080808;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect816"
+       width="22.584076"
+       height="25.324406"
+       x="23.151041"
+       y="254.1942" />
+  </g>
 </svg>
