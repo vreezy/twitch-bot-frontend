@@ -36,9 +36,12 @@
    }
 
    .weapon {
-      // border: 5px solid blue; 
+      // border: 5px solid blue;
+      position: relative;
       width: 60%;
       height: 60%;
+      right: 0px;
+      bottom: 0px;
       // margin-top: -20px;
    }
    

@@ -7,16 +7,9 @@ import './BattleZone.scss';
 import { Player } from '../../models/Player';
 // import { Players } from '../../models/Players';
 
-import { GameService } from '../../services/GameService';
+// import { GameService } from '../../services/GameService';
 
-import rock_left from '../../assets/rock_left.jpg'
-import rock_right from '../../assets/rock_right.jpg'
 
-import paper_left from '../../assets/paper_left.jpg'
-import paper_right from '../../assets/paper_right.jpg'
-
-import scissors_left from '../../assets/scissors_left.jpg'
-import scissors_right from '../../assets/scissors_right.jpg'
 
 export interface IPhaseProps {
    player1: Player;
@@ -46,20 +39,18 @@ export function Phase(props: IPhaseProps) {
       setPhase(0);
    }, [props.round]);
 
-
-
    const player1View = () => {
       if(phase < 1) {
          return props.player1.renderPlayer1Jerking();
       }
-      return props.player1.renderPlayer1();
+      return props.player1.renderPlayer1Weapon();
    }
 
    const palyer2View = () => {
       if(phase < 1) {
          return props.player2.renderPlayer2Jerking();
       }
-      return props.player2.renderPlayer2();
+      return props.player2.renderPlayer2Weapon();
    }
 
    return (

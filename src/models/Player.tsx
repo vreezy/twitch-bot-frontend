@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 // import { GameObject } from './GameObject';
 
 import Component from './Component';
-import { PlayerView } from '../components/PlayerView/PlayerView';
+import { PlayerView, Weapon } from '../components/PlayerView/PlayerView';
 
 export class Player extends Component {
    constructor(userId: string, displayName: string) {
@@ -14,11 +14,13 @@ export class Player extends Component {
       this.active = true;
       this.wins = 0;
       this.isBot = false;
+      this.weapon = Weapon.blank
    }
 
    public readonly userId: string;
    public readonly displayName: string; // ReactNode
    private isBot: boolean;
+   private weapon: Weapon;
 
    private wins: number;
 
@@ -36,6 +38,10 @@ export class Player extends Component {
 
    public deActivate(): void {
       this.active = false;
+   }
+
+   public setWeapon(weapon: Weapon) {
+      this.weapon = weapon;
    }
 
 
@@ -95,6 +101,31 @@ export class Player extends Component {
                wins={this.wins}
                xp={0}
                jerking={true}
+         />
+      );
+   }
+
+   public renderPlayer1Weapon(): React.ReactNode {
+      return (
+         <PlayerView
+               key={uuid()}
+               displayName={this.displayName}
+               wins={this.wins}
+               xp={0}
+               isRight={true}
+               weapon={this.weapon}
+         />
+      );
+   }
+
+   public renderPlayer2Weapon(): React.ReactNode {
+      return (
+         <PlayerView
+               key={uuid()}
+               displayName={this.displayName}
+               wins={this.wins}
+               xp={0}
+               weapon={this.weapon}
          />
       );
    }

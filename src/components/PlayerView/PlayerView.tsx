@@ -8,15 +8,42 @@ import char from '../../assets/char.svg';
 import limb from '../../assets/limb.svg';
 import styles from './PlayerView.module.scss'; 
 
+import blank from '../../assets/blank.svg';
+import rock from '../../assets/rock.svg';
+import paper from '../../assets/paper.svg';
+import scissors from '../../assets/scissors.svg';
+
+export enum Weapon {
+   blank = 0,
+   rock = 1,
+   scissors = 2,
+   paper = 3
+}
+
 export interface IPlayerView {
   displayName: string;
   wins: number;
   xp: number;
+  weapon?: Weapon;
   isRight?: boolean;
   jerking?: boolean;
 }
 
 export function PlayerView(props: IPlayerView) {
+
+   const getWeapon = () => {
+      switch(props.weapon) {
+         case Weapon.rock:
+            return rock;
+         case Weapon.scissors:
+            return scissors;
+         case Weapon.paper:
+            return paper;
+         default:
+            return blank;
+      }
+   }
+
    return (
       <div className={styles.container}>
          <ReactSVG
@@ -101,6 +128,40 @@ export function PlayerView(props: IPlayerView) {
          />
 
          {/* TODO: weapon */}
+
+         {props.weapon && <ReactSVG
+            src={getWeapon()}
+            afterInjection={(error, svg) => {
+               if (error) {
+                  console.error(error)
+                  return
+               }
+         
+               if(svg !== undefined && svg !== null) {
+                  svg.style.width = "100%";
+                  svg.style.height = "100%";
+                  svg.style.transform = props.isRight ? "rotateY(180deg)" : "";
+                  
+               } 
+               // console.log(svg)
+            }}
+            // beforeInjection={svg => {
+            //   svg.classList.add('svg-class-name')
+            //   svg.setAttribute('style', 'width: 200px')
+            // }}
+            evalScripts="always"
+            fallback={() => <span>Error!</span>}
+            loading={() => <span>Loading</span>}
+            renumerateIRIElements={false}
+            wrapper="span"
+            className={[styles.item, styles.weapon].join(" ")}
+            onClick={() => {
+               console.log('wrapper onClick')
+            }}
+         />}
+
+
+
 
          {props.jerking && <ReactSVG
             src={limb}
