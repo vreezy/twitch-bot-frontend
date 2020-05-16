@@ -71,7 +71,7 @@ export function Phase(props: IPhaseProps) {
                      <div className="tile is-4">
                         <div className="columns is-vcentered is-100">
                            <div className="column is-full has-text-centered">
-                              {props.player1.render()}
+                              {props.player1.renderPlayer1()}
                            </div>
                         </div>
                      </div>

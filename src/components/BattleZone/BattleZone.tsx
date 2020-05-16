@@ -131,6 +131,14 @@ export function BattleZone(props: IBattleZoneProps) {
    if(player1 !== null && player2 !== null ) {
       return (
          <div>
+
+
+            <Phase
+               player1={player1}
+               player2={player2}
+               round={round}
+            />
+
             <section className="section"> 
                <div className="container">
                   
@@ -143,12 +151,6 @@ export function BattleZone(props: IBattleZoneProps) {
 
                </div>
             </section>
-
-            <Phase
-               player1={player1}
-               player2={player2}
-               round={round}
-            />
          </div>
       );
    }

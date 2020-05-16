@@ -4,13 +4,15 @@ import { ReactSVG } from 'react-svg'
 // import { useRef, useEffect,} from 'react';
 import player from '../../assets/player3.svg'; 
 import char from '../../assets/char.svg'; 
- 
+
+import 
 import styles from './PlayerView.module.scss'; 
 
 export interface IPlayerView {
   displayName: string;
   wins: number;
   xp: number;
+  isRight?: boolean;
 }
 
 export function PlayerView(props: IPlayerView) {
@@ -45,6 +47,8 @@ export function PlayerView(props: IPlayerView) {
 
                   svg.style.width = "100%";
                   svg.style.height = "100%";
+                  
+                  // transform: rotateY(360deg)
 
                }
                // console.log(svg)
@@ -75,6 +79,8 @@ export function PlayerView(props: IPlayerView) {
                if(svg !== undefined && svg !== null) {
                   svg.style.width = "100%";
                   svg.style.height = "100%";
+                  svg.style.transform = props.isRight ? "rotateY(180deg)" : "";
+
                } 
                // console.log(svg)
             }}
@@ -94,6 +100,37 @@ export function PlayerView(props: IPlayerView) {
          />
 
          {/* TODO: weapon */}
+
+         <ReactSVG
+            src={char}
+            afterInjection={(error, svg) => {
+               if (error) {
+                  console.error(error)
+                  return
+               }
+         
+               if(svg !== undefined && svg !== null) {
+                  svg.style.width = "100%";
+                  svg.style.height = "100%";
+                  svg.style.transform = props.isRight ? "rotateY(180deg)" : "";
+                  
+               } 
+               // console.log(svg)
+            }}
+            // beforeInjection={svg => {
+            //   svg.classList.add('svg-class-name')
+            //   svg.setAttribute('style', 'width: 200px')
+            // }}
+            evalScripts="always"
+            fallback={() => <span>Error!</span>}
+            loading={() => <span>Loading</span>}
+            renumerateIRIElements={false}
+            wrapper="span"
+            className={[styles.item, styles.char].join(" ")}
+            onClick={() => {
+               console.log('wrapper onClick')
+            }}
+         />
 
       </div>
    )

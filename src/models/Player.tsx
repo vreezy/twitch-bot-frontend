@@ -49,4 +49,28 @@ export class Player extends Component {
          />
       );
    }
+
+   public renderPlayer1(): React.ReactNode {
+      return (
+         <PlayerView
+               key={uuid()}
+               displayName={this.displayName}
+               wins={this.wins}
+               xp={0}
+               isRight={true}
+         />
+      );
+   }
+
+   // for better times
+   // public renderPlayer2(): React.ReactNode {
+   //    return (
+   //       <PlayerView
+   //             key={uuid()}
+   //             displayName={this.displayName}
+   //             wins={this.wins}
+   //             xp={0}
+   //       />
+   //    );
+   // }
 }
