@@ -20,7 +20,7 @@ export interface IBattleZoneProps {
 
 export function BattleZone(props: IBattleZoneProps) {
    const [round, setRound] = useState(1);
-   const [roundTime, setRoundTime] = useState(7000); // 10sec view for handle fight
+   const [roundTime, setRoundTime] = useState(10000); // 10sec view for handle fight
 
    useEffect(() => {
       var roundTimerID = setInterval(() => roundTick(), roundTime );
@@ -29,6 +29,11 @@ export function BattleZone(props: IBattleZoneProps) {
       };
    });
 
+   const roundTick = () => {
+      console.log("ROUND TICK")
+      setRound(round + 1);
+   }
+
    const player1: Player | null = props.players.getRandomActivePlayer();
    const player2: Player | null = player1 !== null ? props.players.getRandomActivePlayer([player1]): null; 
 
@@ -36,13 +41,11 @@ export function BattleZone(props: IBattleZoneProps) {
 
 
 
-   const roundTick = () => {
-      setRound(round + 1);
-   }
-
-
+   console.log("ROUND RENDER")
 
    if(player1 !== null && player2 !== null ) {
+      // props.players.remove(player1)
+      // props.players.remove(player2)
       return (
          <div>
 

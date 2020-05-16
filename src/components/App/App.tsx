@@ -39,7 +39,7 @@ function App() {
                   />
       case 1:
          return   <BattleZone
-                     players={players}
+                     players={players.clone()}
                   />
    }
 }
