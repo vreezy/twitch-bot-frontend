@@ -10,8 +10,6 @@ import { Player } from '../../models/Player';
 import { GameService } from '../../services/GameService';
 import { Weapon } from '../PlayerView/PlayerView';
 
-
-
 export interface IPhaseProps {
    player1: Player;
    player2: Player;
@@ -20,19 +18,24 @@ export interface IPhaseProps {
 
 export function Phase(props: IPhaseProps) {
    const [phase, setPhase] = useState(0);
+   const [time, setTime] = useState(2000);
 
    useEffect(() => {
-      var phaseTimerID = setInterval(() => phaseTick(), 5000 );
+      var phaseTimerID = setInterval(() => phaseTick(), time);
       return function cleanup() {
          clearInterval(phaseTimerID);
       };
    });
 
    const phaseTick = () => {
+      if(phase === 0) {
+         setTime(4000);
+      }
       setPhase(phase + 1);
    }
 
    useEffect(() => {
+      setTime(2000);
       setPhase(0);
    }, [props.round]);
 
@@ -53,68 +56,63 @@ export function Phase(props: IPhaseProps) {
    const player1HandValue: number = GameService.rollDice(0, 2);
    const player2HandValue: number = GameService.rollDice(0, 2);
 
+   if(phase === 1 && !props.player1.hasWeapon() && !props.player2.hasWeapon()) {
+      switch(player1HandValue) {
+         case 0:
+            props.player1.setWeapon(Weapon.rock);
+            break;
+         case 1:
+            props.player1.setWeapon(Weapon.paper);
+            break;
+         default:
+         case 2:
+            props.player1.setWeapon(Weapon.scissors);
+            break;
+      }
+
+      switch(player2HandValue) {
+         case 0:
+            props.player2.setWeapon(Weapon.rock);
+            break;
+         case 1:
+            props.player2.setWeapon(Weapon.paper);
+            break;
+         default:
+         case 2:
+            props.player2.setWeapon(Weapon.scissors);
+            break;
+      }
+
+      if(player2HandValue !== player1HandValue) {
+         if(result(player2HandValue, player1HandValue)) {
+            props.player1.deActivate();
+            props.player2.win();
+         }
+         else {
+            props.player1.win()
+            props.player2.deActivate();
+
+         }
+      }
+   }
+
    const player1View = () => {
       if(phase < 1) {
+         return props.player1.renderPlayer1();
+      }
+      if(phase < 2) {
          return props.player1.renderPlayer1Jerking();
       }
-
-      if(!props.player1.hasWeapon()) {
-         switch(player1HandValue) {
-            case 0:
-               props.player1.setWeapon(Weapon.rock);
-               break;
-            case 1:
-               props.player1.setWeapon(Weapon.paper);
-               break;
-            default:
-            case 2:
-               props.player1.setWeapon(Weapon.scissors);
-               break;
-         }
-
-         if(player1HandValue !== player2HandValue) {
-            if(result(player1HandValue, player2HandValue)) {
-               props.player1.win()
-            }
-            else {
-               props.player1.deActivate();
-            }
-         }
-      }
-
       return props.player1.renderPlayer1Weapon();
-      
    }
 
    const player2View = () => {
       if(phase < 1) {
+         return props.player2.renderPlayer2();
+      }
+      if(phase < 2) {
          return props.player2.renderPlayer2Jerking();
       }
-
-      if(!props.player2.hasWeapon()) {
-         switch(player2HandValue) {
-            case 0:
-               props.player2.setWeapon(Weapon.rock);
-               break;
-            case 1:
-               props.player2.setWeapon(Weapon.paper);
-               break;
-            default:
-            case 2:
-               props.player2.setWeapon(Weapon.scissors);
-               break;
-         }
-
-         if(player2HandValue !== player1HandValue) {
-            if(result(player2HandValue, player1HandValue)) {
-               props.player2.win()
-            }
-            else {
-               props.player2.deActivate();
-            }
-         }
-      }
-
       return props.player2.renderPlayer2Weapon();
    }
 
@@ -166,7 +164,7 @@ export default Phase
 
 
 function MiddleView(props: any) {
-   const [countdown, setCountdown] = useState<number>(4);
+   const [countdown, setCountdown] = useState<number>(5);
 
    useEffect(() => {
       var countdownTimerID = setInterval(() => countdownTick(), 1000 );
@@ -180,7 +178,7 @@ function MiddleView(props: any) {
    }
 
    useEffect(() => {
-      setCountdown(4);
+      setCountdown(5);
    }, [props.round]);
 
    if(countdown > 3) {

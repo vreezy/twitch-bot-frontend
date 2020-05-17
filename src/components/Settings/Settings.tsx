@@ -49,7 +49,7 @@ export function Settings(props: ISettingsProps) {
          props.onChangePlayers(players);
          setLoading(false);
          // auto game
-         // props.onChangeMenu(1);
+         props.onChangeMenu(1);
       }
 
       // if(loading || props.minPlayer.toString() !== props.players.length().toString()) {

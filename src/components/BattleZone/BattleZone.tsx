@@ -26,7 +26,7 @@ export function BattleZone(props: IBattleZoneProps) {
    useEffect(() => {
       const interval = setInterval(() => {
          setRound(round => round + 1);
-      }, 10000);
+      }, 12000);
       return () => clearInterval(interval);
    }, []);
 
