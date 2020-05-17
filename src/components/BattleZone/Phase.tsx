@@ -20,25 +20,21 @@ export interface IPhaseProps {
 
 export function Phase(props: IPhaseProps) {
    const [phase, setPhase] = useState(0);
-   const [phaseTime, setPhaseTime] = useState(5000); // 10sec view for handle fight
 
-   console.log("PHASE CALLED")
    useEffect(() => {
-      var phaseTimerID = setInterval(() => phaseTick(), phaseTime );
+      var phaseTimerID = setInterval(() => phaseTick(), 5000 );
       return function cleanup() {
          clearInterval(phaseTimerID);
       };
    });
 
    const phaseTick = () => {
-      console.log("PHASE TICK", phase)
       setPhase(phase + 1);
    }
 
-   // reset phase in next round
-   // useEffect(() => {
-   //    setPhase(0);
-   // }, [props.round]);
+   useEffect(() => {
+      setPhase(0);
+   }, [props.round]);
 
    const result = (myValue: number, enemyValue: number): boolean => {
       if((myValue - enemyValue) === 1 || (myValue - enemyValue) === -1) {
@@ -57,63 +53,65 @@ export function Phase(props: IPhaseProps) {
    const player1HandValue: number = GameService.rollDice(0, 2);
    const player2HandValue: number = GameService.rollDice(0, 2);
 
-   const isOdd = (num: number) => { return num % 2;}
-
    const player1View = () => {
-      if(!isOdd(phase)) {
+      if(phase < 1) {
          return props.player1.renderPlayer1Jerking();
       }
 
-      console.log("bevor player 1 set weappon")
-      switch(player1HandValue) {
-         case 0:
-            props.player1.setWeapon(Weapon.rock);
-            break;
-         case 1:
-            props.player1.setWeapon(Weapon.paper);
-            break;
-         default:
-         case 2:
-            props.player1.setWeapon(Weapon.scissors);
-            break;
-      }
-
-      if(player1HandValue !== player2HandValue) {
-         if(result(player1HandValue, player2HandValue)) {
-            props.player1.win()
+      if(!props.player1.hasWeapon()) {
+         switch(player1HandValue) {
+            case 0:
+               props.player1.setWeapon(Weapon.rock);
+               break;
+            case 1:
+               props.player1.setWeapon(Weapon.paper);
+               break;
+            default:
+            case 2:
+               props.player1.setWeapon(Weapon.scissors);
+               break;
          }
-         else {
-            props.player1.deActivate();
+
+         if(player1HandValue !== player2HandValue) {
+            if(result(player1HandValue, player2HandValue)) {
+               props.player1.win()
+            }
+            else {
+               props.player1.deActivate();
+            }
          }
       }
 
       return props.player1.renderPlayer1Weapon();
+      
    }
 
-   const palyer2View = () => {
-      if(!isOdd(phase)) {
+   const player2View = () => {
+      if(phase < 1) {
          return props.player2.renderPlayer2Jerking();
       }
 
-      switch(player2HandValue) {
-         case 0:
-            props.player2.setWeapon(Weapon.rock);
-            break;
-         case 1:
-            props.player2.setWeapon(Weapon.paper);
-            break;
-         default:
-         case 2:
-            props.player2.setWeapon(Weapon.scissors);
-            break;
-      }
-
-      if(player2HandValue !== player1HandValue) {
-         if(result(player2HandValue, player1HandValue)) {
-            props.player2.win()
+      if(!props.player2.hasWeapon()) {
+         switch(player2HandValue) {
+            case 0:
+               props.player2.setWeapon(Weapon.rock);
+               break;
+            case 1:
+               props.player2.setWeapon(Weapon.paper);
+               break;
+            default:
+            case 2:
+               props.player2.setWeapon(Weapon.scissors);
+               break;
          }
-         else {
-            props.player2.deActivate();
+
+         if(player2HandValue !== player1HandValue) {
+            if(result(player2HandValue, player1HandValue)) {
+               props.player2.win()
+            }
+            else {
+               props.player2.deActivate();
+            }
          }
       }
 
@@ -123,51 +121,40 @@ export function Phase(props: IPhaseProps) {
    return (
       <div>
          <section className="section"> 
-               <div className="container">
-                  <p>Kampfzone (Runde: {props.round})</p>
-                  
-                  <div className="tile">
-                     <div className="tile is-4">
-                        <div className="columns is-vcentered is-100">
-                           <div className="column is-full has-text-centered">
-                              {player1View()}
-                           </div>
+            <div className="container">
+               <p>Kampfzone (Runde: {props.round})</p>
+               <div className="tile">
+
+                  <div className="tile is-4">
+                     <div className="columns is-vcentered is-100">
+                        <div className="column is-full has-text-centered">
+                           {player1View()}
                         </div>
                      </div>
-                     
-                     {/* <div className="tile is-2">
-                     
-
-                           <img src={getSymbol(player1HandValue)} alt="Symbol" className={styles.image}/>
-                           {player1HandValue}<br/>
-                           {resultView(player1HandValue, player2HandValue)} 
-                     </div>  */}
-                     <div className="tile is-4 has-text-centered">
-                           <div className="columns is-vcentered is-100">
-                              <div className="column is-full has-text-centered">
-                                 <MiddleView {...props}/>
-                                 {phase}
-                              </div>
-                           </div>
-   
-                     </div>
-                     {/* <div className="tile is-2">
-
-                           <img src={getSymbolRight(player2HandValue)} alt="Symbol" className={styles.image}/>
-                           {player2HandValue}<br/>
-                           {resultView(player2HandValue, player1HandValue)} 
-                     </div> */}
-                           
-                     <div className="tile is-4">
-                        <div className="columns is-vcentered is-100">
-                           <div className="column is-full has-text-centered">
-                              {palyer2View()}
-                           </div>
-                        </div>   
-                     </div>
-               
                   </div>
+
+                  <div className="tile is-4 has-text-centered">
+                     <div className="columns is-vcentered is-100">
+                        <div className="column is-full has-text-centered">
+                           <MiddleView
+                              {...props}
+                              player1={props.player1}
+                              player2={props.player2}
+                           />
+                        </div>
+                     </div>
+                  </div>
+
+                  <div className="tile is-4">
+                     <div className="columns is-vcentered is-100">
+                        <div className="column is-full has-text-centered">
+                           {player2View()}
+                        </div>
+                     </div>   
+                  </div>
+            
                </div>
+            </div>
          </section>
       </div>
 
@@ -178,39 +165,42 @@ export default Phase
 
 
 function MiddleView(props: any) {
-   const [phase, setPhase] = useState(0);
-   const [phaseTime, setPhaseTime] = useState(1000); 
+   const [countdown, setCountdown] = useState<number>(4);
 
    useEffect(() => {
-      var midTimerID = setInterval(() => phaseTick(), phaseTime );
+      var countdownTimerID = setInterval(() => countdownTick(), 1000 );
       return function cleanup() {
-         clearInterval(midTimerID);
+         clearInterval(countdownTimerID);
       };
    });
 
-   // reset phase in next round
+   const countdownTick = () => {
+      setCountdown(countdown - 1)
+   }
+
    useEffect(() => {
-      
-      setPhase(0);
+      setCountdown(4);
    }, [props.round]);
 
-   const phaseTick = () => {
-      console.log("MID TICK")
-      setPhase(phase + 1);
-   }
-   if(phase < 1) {
-      return <span>VS.</span>
-   }
-   if(phase < 2) {
-      return <span>3</span>
-   }
-   if(phase < 3) {
-      return <span>2</span>
-   }
-   if(phase < 4) {
-      return <span>1</span>
+   if(countdown > 3) {
+      return (
+         <span>VS.</span>
+      );
    }
 
-   return <span></span>
+   if(countdown > 0) {
+      return (
+         <span>{countdown.toString()}</span> 
+      );
+   }
 
+   if(props.player1.hasWeapon() && props.player2.hasWeapon() && props.player1.isActive() && props.player2.isActive()) {
+      return (
+         <span>DRAW</span> 
+      );
+   }
+
+   return (
+      <span></span> 
+   );
 }

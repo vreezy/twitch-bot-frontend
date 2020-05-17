@@ -10,6 +10,7 @@ import { Player } from '../../models/Player';
 import { Players } from '../../models/Players';
 
 import { GameService } from '../../services/GameService';
+import { Weapon } from '../PlayerView/PlayerView';
 
 // import { Weapon } from '../PlayerView/PlayerView';
 
@@ -22,22 +23,30 @@ export function BattleZone(props: IBattleZoneProps) {
    const [round, setRound] = useState(1);
    const [roundTime, setRoundTime] = useState(10000); // 10sec view for handle fight
 
-   useEffect(() => {
-      var roundTimerID = setInterval(() => roundTick(), roundTime );
-      return function cleanup() {
-         clearInterval(roundTimerID);
-      };
-   });
+   // useEffect(() => {
+   //    var roundTimerID = setInterval(() => setRound(round + 1), roundTime );
+   //    return function cleanup() {
+   //       clearInterval(roundTimerID);
+   //    };
+   // });
 
-   const roundTick = () => {
-      console.log("ROUND TICK")
-      setRound(round + 1);
-   }
+   // const roundTick = () => {
+   //    console.log("ROUND TICK")
+   //    setRound(round + 1);
+   // }
+
+   useEffect(() => {
+      const interval = setInterval(() => {
+         setRound(round => round + 1);
+      }, 10000);
+      return () => clearInterval(interval);
+   }, []);
 
    const player1: Player | null = props.players.getRandomActivePlayer();
    const player2: Player | null = player1 !== null ? props.players.getRandomActivePlayer([player1]): null; 
 
-
+   player1?.setWeapon(Weapon.blank);
+   player2?.setWeapon(Weapon.blank);
 
 
 

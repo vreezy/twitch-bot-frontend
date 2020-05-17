@@ -40,11 +40,17 @@ export class Player extends Component {
       this.active = false;
    }
 
+   public isActive(): boolean {
+      return this.active;
+   }
+
    public setWeapon(weapon: Weapon) {
-      console.log(weapon);
       this.weapon = weapon;
    }
 
+   public hasWeapon() {
+      return this.weapon !== Weapon.blank;
+   }
 
    public render(): React.ReactNode {
       return (
