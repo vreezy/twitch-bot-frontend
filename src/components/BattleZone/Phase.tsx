@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-// import styles from './BattleZone.module.scss'; 
-import './BattleZone.scss';
 
 import { Player } from '../../models/Player';
 // import { Players } from '../../models/Players';
 
 import { GameService } from '../../services/GameService';
 import { Weapon } from '../PlayerView/PlayerView';
+
+import styles from './Phase.module.scss';
 
 export interface IPhaseProps {
    player1: Player;
@@ -183,32 +183,32 @@ function MiddleView(props: any) {
 
    if(countdown > 3) {
       return (
-         <span>VS.</span>
+         <span className={styles.fireText}>vs.</span>
       );
    }
 
    if(countdown > 0) {
       return (
-         <span>{countdown.toString()}</span> 
+         <span className={styles.middleText}>{countdown.toString()}</span> 
       );
    }
 
    if(props.phase > 0 && props.player1.hasWeapon() && props.player2.hasWeapon()){
       if(props.player1.isActive() && props.player2.isActive()) {
          return (
-            <span>DRAW</span> 
+            <span className={styles.finalText}>DRAW</span>
          );
       }
 
       if(props.player1.isActive() && !props.player2.isActive()) {
          return (
-            <span>{props.player1.displayName} Wins</span> 
+            <span className={styles.finalText}>{props.player1.displayName} Wins</span> 
          );
       }
 
       if(!props.player1.isActive() && props.player2.isActive()) {
          return (
-            <span>{props.player2.displayName}  Wins</span> 
+            <span className={styles.finalText}>{props.player2.displayName}  Wins</span> 
          );
       }
    }
