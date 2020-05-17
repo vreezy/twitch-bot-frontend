@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="284.7727"
+     inkscape:cx="174.41556"
      inkscape:cy="201.51281"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -52,27 +52,5 @@
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-197)">
-    <rect
-       style="opacity:1;fill:#af78ff;fill-opacity:1;stroke:#080808;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect812"
-       width="23.623512"
-       height="25.985863"
-       x="14.835566"
-       y="217.34152" />
-    <rect
-       style="opacity:1;fill:#af78ff;fill-opacity:1;stroke:#080808;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect814"
-       width="27.214285"
-       height="31.75"
-       x="44.223213"
-       y="232.83855" />
-    <rect
-       style="opacity:1;fill:#af78ff;fill-opacity:1;stroke:#080808;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect816"
-       width="22.584076"
-       height="25.324406"
-       x="23.151041"
-       y="254.1942" />
-  </g>
+     transform="translate(0,-197)" />
 </svg>

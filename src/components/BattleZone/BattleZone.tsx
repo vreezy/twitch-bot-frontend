@@ -9,7 +9,7 @@ import './BattleZone.scss';
 import { Player } from '../../models/Player';
 import { Players } from '../../models/Players';
 
-import { GameService } from '../../services/GameService';
+//bimport { GameService } from '../../services/GameService';
 import { Weapon } from '../PlayerView/PlayerView';
 
 // import { Weapon } from '../PlayerView/PlayerView';
@@ -21,19 +21,7 @@ export interface IBattleZoneProps {
 
 export function BattleZone(props: IBattleZoneProps) {
    const [round, setRound] = useState(1);
-   const [roundTime, setRoundTime] = useState(10000); // 10sec view for handle fight
 
-   // useEffect(() => {
-   //    var roundTimerID = setInterval(() => setRound(round + 1), roundTime );
-   //    return function cleanup() {
-   //       clearInterval(roundTimerID);
-   //    };
-   // });
-
-   // const roundTick = () => {
-   //    console.log("ROUND TICK")
-   //    setRound(round + 1);
-   // }
 
    useEffect(() => {
       const interval = setInterval(() => {
@@ -48,9 +36,6 @@ export function BattleZone(props: IBattleZoneProps) {
    player1?.setWeapon(Weapon.blank);
    player2?.setWeapon(Weapon.blank);
 
-
-
-   console.log("ROUND RENDER")
 
    if(player1 !== null && player2 !== null ) {
       // props.players.remove(player1)

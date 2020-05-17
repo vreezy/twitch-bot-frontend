@@ -122,7 +122,7 @@ export function Phase(props: IPhaseProps) {
       <div>
          <section className="section"> 
             <div className="container">
-               <p>Kampfzone (Runde: {props.round})</p>
+               <p>Stein Papier Schere (Runde: {props.round})</p>
                <div className="tile">
 
                   <div className="tile is-4">
@@ -140,6 +140,7 @@ export function Phase(props: IPhaseProps) {
                               {...props}
                               player1={props.player1}
                               player2={props.player2}
+                              phase={phase}
                            />
                         </div>
                      </div>
@@ -194,11 +195,26 @@ function MiddleView(props: any) {
       );
    }
 
-   if(props.player1.hasWeapon() && props.player2.hasWeapon() && props.player1.isActive() && props.player2.isActive()) {
-      return (
-         <span>DRAW</span> 
-      );
+   if(props.phase > 0 && props.player1.hasWeapon() && props.player2.hasWeapon()){
+      if(props.player1.isActive() && props.player2.isActive()) {
+         return (
+            <span>DRAW</span> 
+         );
+      }
+
+      if(props.player1.isActive() && !props.player2.isActive()) {
+         return (
+            <span>{props.player1.displayName} Wins</span> 
+         );
+      }
+
+      if(!props.player1.isActive() && props.player2.isActive()) {
+         return (
+            <span>{props.player2.displayName}  Wins</span> 
+         );
+      }
    }
+
 
    return (
       <span></span> 
